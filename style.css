@@ -1,0 +1,345 @@
+:root {
+  --bgColor: hsla(242, 86%, 6%, 1);
+  --bgColorLight: hsla(242, 86%, 24%, 1);
+  --textColor: hsla(242, 86%, 88%, 1);
+  --textColorDark: hsla(242, 36%, 0%, 1);
+  --paperColor: hsla(242, 86%, 44%, 1);
+  --paperColorDark: hsla(242, 86%, 34%, 1);
+  --shadowColorFaint: hsla(0, 0%, 0%, 0.2);
+}
+
+::selected {
+  color: var(--textColorDark);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  background: var(--bgColor);
+  background: linear-gradient(135deg, var(--bgColor), var(--bgColorLight));
+  color: var(--textColor);
+  font-family: 'Saira', sans-serif;
+  position: relative;
+}
+
+* {
+  box-sizing: border-box;
+  transition: all 0.12s cubic-bezier(0.42, 0.54, 0.22, 1.26);
+}
+
+.heading {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--textColor);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  max-width: 800px;
+  padding: 1rem 0;
+
+}
+
+.heading div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover svg,
+.button:hover svg {
+  stroke: orange;
+}
+
+span#pauseIcon {
+  display: none;
+}
+
+button:hover,
+.button:hover {
+  background: var(--paperColorLight);
+  color: var(--textColor);
+}
+
+button svg {
+  stroke: var(--textColor);
+  height: 30px;
+  width: 30px;
+}
+
+button,
+.button,
+button:focus,
+.button:focus {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  border-radius: 100px;
+  background: var(--paperColorLight);
+  color: var(--textColor);
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 20px 60px var(--shadowColorFaint);
+  cursor: pointer;
+}
+
+
+/* Main audio controls container */
+.audio-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: var(--bgColor);
+  background: linear-gradient(135deg, var(--bgColor), var(--bgColorLight));
+  color: var(--textColor);
+  font-family: 'Saira', sans-serif;
+  z-index: 1000;
+  padding: 2rem;
+  /* Padding to prevent elements from touching sides */
+  box-sizing: border-box;
+}
+
+
+
+
+/* Playlist List Styling */
+#playlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(135deg, var(--bgColor), var(--bgColorLight));
+  overflow-y: auto;
+  max-height: 250px;
+  position: absolute;
+  bottom: 0;
+  max-width: 400px;
+  transform: translateY(100%);
+  /* Starts off the screen */
+  opacity: 0;
+  /* Starts invisible */
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  /* Smooth slide and fade */
+  scrollbar-color: rgb(28, 41, 156) rgb(0, 144, 176);
+  scrollbar-width: auto;
+  scroll-snap-align: center;
+  scroll-snap-type: y proximity;
+}
+
+#playlistUL {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+/* Show the playlist by sliding it up */
+#playlist.show {
+  transform: translateY(-64px);
+  /* Slides up to its original position */
+  opacity: 1;
+  /* Fade in */
+}
+
+/* Optionally, style the playlist items */
+#playlistUL li {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+#playlistUL li:hover {
+  font-weight: bold;
+}
+
+/* Next Song Container on the right */
+.next-song {
+  height: 100%;
+  padding: 1rem;
+  text-align: right;
+  color: var(--textColor);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+#canvas {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+#volume-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+#volume-button img {
+  width: 24px;
+  height: 24px;
+}
+
+#volume {
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  border-radius: 4px;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+#volume.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#volume-slider {
+  width: 100px;
+}
+
+
+.bar {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  margin: -5px auto;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.33);
+}
+
+#barEmpty {
+  width: 90%;
+  opacity: 0.5;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+#barFull {
+  width: 90%;
+}
+
+.timeSlider {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#sliderBtn {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 93.25%;
+  margin: -25px auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.33);
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+/* Progress */
+#waveform {
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin: -10% auto;
+  display: none;
+  cursor: pointer;
+  opacity: 0.8;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#waveform:hover {
+  opacity: 1;
+}
+
+audio {
+  position: fixed;
+  left: 10px;
+  bottom: -10px;
+  width: calc(100% - 20px);
+}
+
+audio.active {
+  bottom: 10px;
+}
+
+#thefile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+label.file {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  padding: 1rem 2rem;
+  border-radius: 4px;
+
+  background: var(--paperColor);
+  color: var(--textColor);
+  font-size: 1.25em;
+  font-weight: 700;
+  box-shadow: 0 20px 60px var(--shadowColorFaint);
+
+  cursor: pointer;
+}
+
+
+label.file:hover {
+  background: var(--paperColorDark);
+  transform: translate3d(-50%, -55%, 0);
+}
+
+label.file:active {
+  background: var(--paperColorDark);
+  transform: translate3d(-50%, -45%, 0);
+}
+
+label.file.normal {
+  transform: translate3d(10%, 50%, 0);
+  padding: 0.2rem 2rem;
+  font-size: 1rem;
+  top: 0;
+  left: 0;
+}
