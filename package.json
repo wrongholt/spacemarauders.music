@@ -1,7 +1,17 @@
 {
+  "name": "space-marauders-music",
+  "version": "1.0.0",
+  "description": "A simple Node.js app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "dotenv": "^16.4.7",
     "feather-icons": "^4.29.2",
     "requirejs": "^2.3.7"
-  }
+  },
+  "devDependencies": {},
+  "license": "MIT"
 }
