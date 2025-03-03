@@ -24,9 +24,6 @@ jobs:
       - name: Create .env File
         run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
 
-      - name: Build Project
-        run: npm run build
-
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
