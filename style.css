@@ -96,7 +96,7 @@ button:focus,
 /* Main audio controls container */
 .audio-controls {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   position: fixed;
   bottom: 0;
@@ -113,7 +113,12 @@ button:focus,
   box-sizing: border-box;
 }
 
+@media screen and (max-width: 360px) {
+  .audio-controls {
+    padding: 5px;
+  }
 
+}
 
 
 /* Playlist List Styling */
@@ -176,6 +181,36 @@ button:focus,
   box-sizing: border-box;
 }
 
+.controls {
+  display: flex;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100vh;
+  /* Ensure it fills the viewport height */
+}
+
+.controls button {
+  height: 45px;
+  /* Slightly larger for better touch usability */
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.controls button span {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #canvas {
   position: fixed;
   left: 0;
@@ -191,16 +226,23 @@ button:focus,
   position: relative;
 }
 
+@media screen and (max-width: 360px) {
+  .volume-container {
+    display: none;
+  }
+
+}
+
 #volume-button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 1px;
 }
 
 #volume-button img {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
 }
 
 #volume {
@@ -208,18 +250,20 @@ button:focus,
   position: absolute;
   bottom: 50px;
   left: 10px;
+  /* Keep it relative to the button */
   background: rgba(0, 0, 0, 0.8);
   padding: 5px;
   border-radius: 4px;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(10px) translateX(-75%);
+  /* Moves it left */
 }
 
 #volume.show {
   display: block;
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateX(-75%);
 }
 
 #volume-slider {
@@ -253,6 +297,13 @@ button:focus,
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 675px) {
+  .timeSlider {
+    display: none;
+  }
+
 }
 
 #sliderBtn {
