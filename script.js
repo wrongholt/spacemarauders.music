@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Draw Something", src: "https://the-tales.s3.us-east-1.amazonaws.com/NewMusic/Draw+Something.mp3" },
         { name: "Draw Something", src: "https://the-tales.s3.us-east-1.amazonaws.com/NewMusic/Draw+Something.wav" },
         { name: "Drifting Away", src: "https://the-tales.s3.us-east-1.amazonaws.com/NewMusic/Drifting+Away.mp3" },
-        { name: "Drifting Through the Stars", src: "https://the-tales.s3.us-east-1.amazonaws.com/NewMusic/Drifting+Through+the+Stars.mp3" }
+        { name: "Drifting Through the Stars", src: "https://the-tales.s3.us-east-1.amazonaws.com/NewMusic/Drifting+Through+the+Stars.mp3" },
         { name: "Echoes in the Void", src: "https://the-tales.s3.us-east-1.amazonaws.com/NewMusic/Echoes+in+the+Void.mp3" },
         { name: "Fangs and Fire Acoustic", src: "https://the-tales.s3.us-east-1.amazonaws.com/NewMusic/Fangs+and+Fire+Acoustic.mp3" },
         { name: "Fangs and Fire", src: "https://the-tales.s3.us-east-1.amazonaws.com/NewMusic/Fangs+and+Fire.mp3" },
